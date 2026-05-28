@@ -81,8 +81,8 @@ export default function ContactSection() {
                 {
                   Icon: Mail,
                   label: 'Email',
-                  value: 'hello@medeb.io',
-                  href: 'mailto:hello@medeb.io',
+                  value: 'hello@medeb.space',
+                  href: 'mailto:hello@medeb.space',
                 },
                 {
                   Icon: Phone,

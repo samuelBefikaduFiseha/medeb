@@ -53,7 +53,7 @@ const pricingLog = [
     updated: '620.00',
     change: '+6.9%',
     positive: true,
-    admin: 'admin@medeb.io',
+    admin: 'admin@medeb.space',
     ts: '2024-01-15  09:42:11',
   },
   {
@@ -63,7 +63,7 @@ const pricingLog = [
     updated: '2,950.00',
     change: '+5.4%',
     positive: true,
-    admin: 'admin@medeb.io',
+    admin: 'admin@medeb.space',
     ts: '2024-01-15  10:15:38',
   },
   {
@@ -73,7 +73,7 @@ const pricingLog = [
     updated: '1,390.00',
     change: '−4.1%',
     positive: false,
-    admin: 'admin@medeb.io',
+    admin: 'admin@medeb.space',
     ts: '2024-01-15  10:58:22',
   },
   {
@@ -83,7 +83,7 @@ const pricingLog = [
     updated: '480.00',
     change: '0.0%',
     positive: null,
-    admin: 'admin@medeb.io',
+    admin: 'admin@medeb.space',
     ts: '2024-01-15  11:30:05',
   },
   {
@@ -93,7 +93,7 @@ const pricingLog = [
     updated: '1,280.00',
     change: '+6.7%',
     positive: true,
-    admin: 'admin@medeb.io',
+    admin: 'admin@medeb.space',
     ts: '2024-01-15  13:12:44',
   },
 ]

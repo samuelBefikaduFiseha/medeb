@@ -7,6 +7,38 @@ function esc(s: string) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
 
+/**
+ * Inline SVG logo block — market stall icon + wordmark.
+ * Uses a <table> layout for broad email client support.
+ * The SVG (tent peaks / counter / amber dot) mirrors the React component exactly.
+ */
+const LOGO_HTML = `
+<div style="display:inline-block;background:linear-gradient(135deg,#7c3aed 0%,#5b21b6 55%,#2e1065 100%);border-radius:16px;padding:14px 22px;margin-bottom:20px;">
+  <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+    <tr>
+      <td style="padding-right:10px;vertical-align:middle;">
+        <svg width="34" height="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Market stall canopy — two tent peaks forming the M -->
+          <path d="M5,34 L5,22 L14,8 L23,19 L32,8 L43,22 L43,34"
+                stroke="#ffffff" stroke-width="4.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Stall counter / shelf -->
+          <line x1="5" y1="29" x2="43" y2="29"
+                stroke="#ffffff" stroke-width="3"
+                stroke-linecap="round" stroke-opacity="0.65"/>
+          <!-- Amber goods dot -->
+          <circle cx="24" cy="39" r="4" fill="#f59e0b"/>
+        </svg>
+      </td>
+      <td style="vertical-align:middle;">
+        <div style="color:#ffffff;font-size:26px;font-weight:900;letter-spacing:-0.5px;line-height:1;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Medeb</div>
+        <div style="color:rgba(255,255,255,0.45);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;margin-top:2px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Wholesale Platform</div>
+      </td>
+    </tr>
+  </table>
+</div>
+`
+
 function confirmationEmail(name: string, company: string, message: string): string {
   const preview = esc(message.slice(0, 200))
   return `<!DOCTYPE html>
@@ -19,12 +51,8 @@ function confirmationEmail(name: string, company: string, message: string): stri
 
   <!-- Header -->
   <tr>
-    <td style="background:linear-gradient(135deg,#1e1b4b 0%,#3730a3 50%,#4338ca 100%);padding:40px 48px 36px;text-align:center;">
-      <div style="display:inline-block;background:rgba(255,255,255,0.12);border-radius:14px;padding:10px 20px;margin-bottom:14px;">
-        <span style="color:#fff;font-size:26px;font-weight:900;letter-spacing:-0.5px;vertical-align:middle;">M</span>
-        <span style="color:#fff;font-size:22px;font-weight:900;letter-spacing:-0.3px;vertical-align:middle;margin-left:4px;">edeb</span>
-        <span style="display:inline-block;width:8px;height:8px;background:#f59e0b;border-radius:50%;vertical-align:middle;margin-left:6px;"></span>
-      </div>
+    <td style="background:linear-gradient(135deg,#2e1065 0%,#5b21b6 50%,#7c3aed 100%);padding:40px 48px 36px;text-align:center;">
+      ${LOGO_HTML}
       <p style="color:rgba(255,255,255,0.55);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;margin:0;">Enterprise B2B Wholesale Platform</p>
     </td>
   </tr>
@@ -42,14 +70,14 @@ function confirmationEmail(name: string, company: string, message: string): stri
       </p>
 
       <!-- Message preview -->
-      <div style="background:#f8fafc;border-left:3px solid #6366f1;border-radius:0 10px 10px 0;padding:18px 20px;margin-bottom:30px;">
+      <div style="background:#f8fafc;border-left:3px solid #7c3aed;border-radius:0 10px 10px 0;padding:18px 20px;margin-bottom:30px;">
         <p style="font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 8px;font-weight:700;">Your message</p>
         <p style="font-size:14px;color:#334155;line-height:1.7;margin:0;font-style:italic;">&ldquo;${preview}${message.length > 200 ? '&hellip;' : ''}&rdquo;</p>
       </div>
 
       <!-- CTA -->
       <div style="text-align:center;margin:0 0 36px;">
-        <a href="https://medeb.io" style="display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#1e293b;text-decoration:none;font-weight:800;font-size:14px;padding:15px 36px;border-radius:12px;letter-spacing:0.01em;">
+        <a href="https://medeb.space" style="display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#1e293b;text-decoration:none;font-weight:800;font-size:14px;padding:15px 36px;border-radius:12px;letter-spacing:0.01em;">
           Explore the Platform &rarr;
         </a>
       </div>
@@ -60,12 +88,12 @@ function confirmationEmail(name: string, company: string, message: string): stri
           <td style="padding-top:20px;">
             <p style="font-size:13px;color:#94a3b8;margin:0 0 10px;">Need immediate assistance?</p>
             <p style="font-size:14px;color:#475569;margin:0 0 6px;">
-              <span style="color:#6366f1;font-weight:700;">&#9743;</span>&nbsp;
+              <span style="color:#7c3aed;font-weight:700;">&#9743;</span>&nbsp;
               <a href="tel:+251996995878" style="color:#475569;text-decoration:none;font-weight:600;">+251 99 699 5878</a>
             </p>
             <p style="font-size:14px;color:#475569;margin:0;">
-              <span style="color:#6366f1;font-weight:700;">&#9993;</span>&nbsp;
-              <a href="mailto:hello@medeb.io" style="color:#6366f1;text-decoration:none;font-weight:600;">hello@medeb.io</a>
+              <span style="color:#7c3aed;font-weight:700;">&#9993;</span>&nbsp;
+              <a href="mailto:hello@medeb.space" style="color:#7c3aed;text-decoration:none;font-weight:600;">hello@medeb.space</a>
             </p>
           </td>
         </tr>
@@ -80,7 +108,7 @@ function confirmationEmail(name: string, company: string, message: string): stri
         &copy; ${new Date().getFullYear()} Medeb Technologies &middot; Addis Ababa, Ethiopia
       </p>
       <p style="color:#334155;font-size:11px;margin:0;">
-        You received this email because you submitted a contact form on medeb.io
+        You received this email because you submitted a contact form on medeb.space
       </p>
     </td>
   </tr>
@@ -107,15 +135,16 @@ function adminNotificationEmail(
 <tr><td>
 <table width="560" align="center" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
   <tr>
-    <td style="background:#1e1b4b;padding:24px 36px;">
-      <p style="color:#a5b4fc;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 4px;">Medeb Admin — New Lead</p>
+    <td style="background:linear-gradient(135deg,#2e1065 0%,#5b21b6 60%,#7c3aed 100%);padding:28px 36px;">
+      ${LOGO_HTML}
+      <p style="color:rgba(255,255,255,0.6);font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin:8px 0 4px;">New Lead Notification</p>
       <h1 style="color:#fff;font-size:20px;font-weight:800;margin:0;">${esc(name)} &middot; ${esc(company)}</h1>
     </td>
   </tr>
   <tr>
     <td style="padding:32px 36px;">
       <table width="100%" cellpadding="6" cellspacing="0">
-        <tr><td style="font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;width:100px;">Email</td><td><a href="mailto:${esc(email)}" style="color:#6366f1;font-weight:600;font-size:14px;">${esc(email)}</a></td></tr>
+        <tr><td style="font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;width:100px;">Email</td><td><a href="mailto:${esc(email)}" style="color:#7c3aed;font-weight:600;font-size:14px;">${esc(email)}</a></td></tr>
         <tr><td style="font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;">Phone</td><td style="font-size:14px;color:#334155;">${phone ? esc(phone) : '<span style="color:#cbd5e1">—</span>'}</td></tr>
         <tr><td style="font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;">Company</td><td style="font-size:14px;color:#334155;font-weight:600;">${esc(company)}</td></tr>
       </table>
@@ -124,7 +153,7 @@ function adminNotificationEmail(
         <p style="font-size:14px;color:#1e293b;line-height:1.7;margin:0;">${esc(message)}</p>
       </div>
       <div style="margin-top:24px;text-align:center;">
-        <a href="https://medeb.io/admin/leads" style="display:inline-block;background:#4f46e5;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:12px 28px;border-radius:10px;">View in Admin Dashboard &rarr;</a>
+        <a href="https://medeb.space/admin/leads" style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:12px 28px;border-radius:10px;">View in Admin Dashboard &rarr;</a>
       </div>
     </td>
   </tr>
@@ -166,7 +195,7 @@ export async function POST(request: NextRequest) {
   // Send emails (non-blocking — DB save already succeeded)
   const resendKey = process.env.RESEND_API_KEY
   if (resendKey) {
-    const from = process.env.FROM_EMAIL ?? 'Medeb <noreply@medeb.io>'
+    const from = process.env.FROM_EMAIL ?? 'Medeb <noreply@medeb.space>'
     const adminTo = process.env.ADMIN_EMAIL ?? 'befikadufiseha23@gmail.com'
 
     await Promise.allSettled([

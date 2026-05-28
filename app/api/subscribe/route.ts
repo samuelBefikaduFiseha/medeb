@@ -1,6 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
+/**
+ * Inline SVG logo block — market stall icon + wordmark.
+ * Uses a <table> layout for broad email client support.
+ * The SVG (tent peaks / counter / amber dot) mirrors the React component exactly.
+ */
+const LOGO_HTML = `
+<div style="display:inline-block;background:linear-gradient(135deg,#7c3aed 0%,#5b21b6 55%,#2e1065 100%);border-radius:16px;padding:14px 22px;margin-bottom:20px;">
+  <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+    <tr>
+      <td style="padding-right:10px;vertical-align:middle;">
+        <svg width="34" height="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Market stall canopy — two tent peaks forming the M -->
+          <path d="M5,34 L5,22 L14,8 L23,19 L32,8 L43,22 L43,34"
+                stroke="#ffffff" stroke-width="4.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Stall counter / shelf -->
+          <line x1="5" y1="29" x2="43" y2="29"
+                stroke="#ffffff" stroke-width="3"
+                stroke-linecap="round" stroke-opacity="0.65"/>
+          <!-- Amber goods dot -->
+          <circle cx="24" cy="39" r="4" fill="#f59e0b"/>
+        </svg>
+      </td>
+      <td style="vertical-align:middle;">
+        <div style="color:#ffffff;font-size:26px;font-weight:900;letter-spacing:-0.5px;line-height:1;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Medeb</div>
+        <div style="color:rgba(255,255,255,0.45);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;margin-top:2px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Wholesale Platform</div>
+      </td>
+    </tr>
+  </table>
+</div>
+`
+
 function welcomeEmail(): string {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -12,12 +44,8 @@ function welcomeEmail(): string {
 
   <!-- Header -->
   <tr>
-    <td style="background:linear-gradient(135deg,#1e1b4b 0%,#3730a3 50%,#4338ca 100%);padding:48px 48px 40px;text-align:center;">
-      <div style="display:inline-block;background:rgba(255,255,255,0.12);border-radius:14px;padding:10px 20px;margin-bottom:16px;">
-        <span style="color:#fff;font-size:26px;font-weight:900;letter-spacing:-0.5px;vertical-align:middle;">M</span>
-        <span style="color:#fff;font-size:22px;font-weight:900;letter-spacing:-0.3px;vertical-align:middle;margin-left:4px;">edeb</span>
-        <span style="display:inline-block;width:8px;height:8px;background:#f59e0b;border-radius:50%;vertical-align:middle;margin-left:6px;"></span>
-      </div>
+    <td style="background:linear-gradient(135deg,#2e1065 0%,#5b21b6 50%,#7c3aed 100%);padding:48px 48px 40px;text-align:center;">
+      ${LOGO_HTML}
       <h1 style="color:#fff;font-size:26px;font-weight:900;margin:0 0 10px;line-height:1.2;">
         You&rsquo;re on the list!
       </h1>
@@ -39,10 +67,10 @@ function welcomeEmail(): string {
       <!-- Feature highlights -->
       <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
         ${[
-          ['🏪', 'Live Retail Catalog', 'Real-time, admin-curated product catalog with structured browsing.'],
-          ['📊', 'Daily Pricing Governance', 'Immutable audit trails for every single price change.'],
-          ['🔒', 'Medeb Approval Vault', 'Asynchronous staging pipeline — no change goes live without admin sign-off.'],
-          ['⚡', '5–10 Min RFQ Engine', 'Custom sourcing requests fulfilled in minutes, not hours.'],
+          ['🏪', 'Live Retail Catalog',       'Real-time, admin-curated product catalog with structured browsing.'],
+          ['📊', 'Daily Pricing Governance',  'Immutable audit trails for every single price change.'],
+          ['🔒', 'Medeb Approval Vault',      'Asynchronous staging pipeline — no change goes live without admin sign-off.'],
+          ['⚡', '5–10 Min RFQ Engine',       'Custom sourcing requests fulfilled in minutes, not hours.'],
         ]
           .map(
             ([icon, title, desc]) => `
@@ -64,7 +92,7 @@ function welcomeEmail(): string {
 
       <!-- CTA -->
       <div style="text-align:center;margin:0 0 36px;">
-        <a href="https://medeb.io" style="display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#1e293b;text-decoration:none;font-weight:800;font-size:14px;padding:15px 36px;border-radius:12px;">
+        <a href="https://medeb.space" style="display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#1e293b;text-decoration:none;font-weight:800;font-size:14px;padding:15px 36px;border-radius:12px;">
           Explore Medeb &rarr;
         </a>
       </div>
@@ -76,7 +104,7 @@ function welcomeEmail(): string {
           <a href="tel:+251996995878" style="color:#475569;text-decoration:none;font-weight:600;">&#9743; +251 99 699 5878</a>
         </p>
         <p style="font-size:14px;margin:0;">
-          <a href="mailto:hello@medeb.io" style="color:#6366f1;text-decoration:none;font-weight:600;">&#9993; hello@medeb.io</a>
+          <a href="mailto:hello@medeb.space" style="color:#7c3aed;text-decoration:none;font-weight:600;">&#9993; hello@medeb.space</a>
         </p>
       </div>
     </td>
@@ -89,7 +117,7 @@ function welcomeEmail(): string {
         &copy; ${new Date().getFullYear()} Medeb Technologies &middot; Addis Ababa, Ethiopia
       </p>
       <p style="color:#334155;font-size:11px;margin:0;">
-        You&rsquo;re receiving this because you signed up at medeb.io
+        You&rsquo;re receiving this because you signed up at medeb.space
       </p>
     </td>
   </tr>
@@ -124,7 +152,7 @@ export async function POST(request: NextRequest) {
   // Send welcome email (skip if already subscribed — duplicate)
   const resendKey = process.env.RESEND_API_KEY
   if (resendKey && !dbError) {
-    const from = process.env.FROM_EMAIL ?? 'Medeb <noreply@medeb.io>'
+    const from = process.env.FROM_EMAIL ?? 'Medeb <noreply@medeb.space>'
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },

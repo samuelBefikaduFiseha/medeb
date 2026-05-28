@@ -81,7 +81,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  placeholder="admin@medeb.io"
+                  placeholder="admin@medeb.space"
                   className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 hover:border-slate-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/10 text-slate-800 text-sm outline-none transition-all"
                 />
               </div>
