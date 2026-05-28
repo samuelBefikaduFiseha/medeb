@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   title: 'Medeb — Enterprise B2B Wholesale Commerce Platform',
   description:
     'Medeb is an admin-governed B2B wholesale commerce and digital supply chain ecosystem. Real-time catalog, immutable pricing governance, and a 5–10 minute custom sourcing engine.',
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/icon.svg',
+  },
   openGraph: {
     title: 'Medeb — Enterprise B2B Wholesale Commerce Platform',
     description:
